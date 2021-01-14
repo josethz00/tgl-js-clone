@@ -14,7 +14,7 @@ input, button {
 
 }
 
-body > .header-content {
+.header-content {
 
     width: 100%;
     height: 76px;
@@ -136,21 +136,20 @@ body > main.container {
 
 }
 
-body > main.container > .bet {
+main.container > .bet {
 
-    background-color: #707070;
     grid-area: bet;
 
 }
 
-body > main.container > .cart {
+main.container > .cart {
 
     background-color: blue;
     grid-area: cart;
 
 }
 
-body > main.container > footer {
+main.container > footer {
 
     background-color: #f7f7f7;
     grid-area: footer;
@@ -159,12 +158,139 @@ body > main.container > footer {
 
 }
 
-body > main.container > .bet > div:first-of-type {
+main.container > .bet > div:first-of-type {
 
     display: flex;
     align-items: center;
     text-transform: uppercase;
     font-size: 24px;
     font-weight: 300;
+    font-style: italic;
+    color: #707070;
+
+}
+
+main.container > .bet > div:first-of-type > p:first-of-type {
+
+    margin-right: 9px;
+    font-weight: 700;
+
+}
+
+main.container > .bet > div:nth-child(2) {
+
+    display: flex;
+    font-size: 17px;
+    font-weight: 500;
+    font-style: italic;
+    color: #868686;
+    flex-direction: column;
+
+}
+
+main.container > .bet > div:nth-child(2) > p {
+
+    margin-bottom: 20px;
+
+} 
+
+main.container > .bet > div:nth-child(2) button {
+
+    border-radius: 100px;
+    width: 113px;
+    height: 34px;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(1) {
+
+    background-color: #fff;
+    color: #7F3992;
+    border: 2px solid #7F3992;
+    margin-right: 15px;
+    transition: .3s linear;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(1):hover {
+
+    color: #fff;
+    background-color: #7F3992;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(2) {
+
+    background-color: #01AC66;
+    color: #fff;
+    border: 2px solid #01AC66;
+    margin-right: 15px;
+    transition: .3s linear;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(2):hover {
+
+    color: #01AC66;
+    background-color: #fff;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(3) {
+
+    background-color: #fff;
+    color: #F79C31;
+    border: 2px solid #F79C31;
+    transition: .3s linear;
+
+}
+
+main.container > .bet > div:nth-child(2) button:nth-child(3):hover {
+
+    color: #fff;
+    background-color: #F79C31;
+
+}
+
+main.container > .bet > div:nth-child(3) {
+
+    margin-top: 28px;
+
+}
+
+main.container > .bet > div:nth-child(3) > p:first-of-type {
+
+    font-size: 17px;
+    color: #868686;
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 10px;
+
+}
+
+main.container > .bet > div:nth-child(3) > p + p {
+
+    font-size: 17px;
+    color: #868686;
+    font-weight: 300;
+    font-style: italic;
+    margin: 0;
+
+}
+
+.main-container > .bet > div:nth-child(4) {
+    
+    display: grid;
+    grid-template-columns: repeat(9, 65px);
+    grid-template-rows: repeat(4, 68px);
+    grid-template-areas: '1 2 3 4 5 6 7 8 9'
+                        '10 11 12 13 14 15 16 17 18'
+                        '19 20 21 22 23 24 25 26 27'
+                        '28 29 30 31 32 33 34 35 36';
+    gap: 15px;
 
 }
