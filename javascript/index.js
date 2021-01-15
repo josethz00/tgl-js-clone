@@ -52,6 +52,8 @@ window.onload = () => {
 
         }
 
+        return;
+
     }
 
     function betNumbersEvents () {
