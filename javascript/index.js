@@ -4,6 +4,7 @@ window.onload = () => {
     const betNumbers = [1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
     const betNumbersElements = [];
     let markedNumbers = [];
+    let currentBetType = 'loto';
 
     function createCssStyleTag () {
 
@@ -42,9 +43,20 @@ window.onload = () => {
 
     populateBetGrid ();
 
+    function clearGame () {
+
+        for (let index = 0; index < betNumbersElements.length; index++) {
+
+            betNumbersElements[index].className = `bet-grid-${index+1}`;
+            markedNumbers.splice(index, 1);
+
+        }
+
+    }
+
     function betNumbersEvents () {
 
-        for (let index = 0; index <= betNumbersElements.length; index++) {
+        for (let index = 0; index < betNumbersElements.length; index++) {
 
             betNumbersElements[index].addEventListener('click', () => {
 
@@ -58,7 +70,7 @@ window.onload = () => {
                 else {
 
                     markedNumbers.push(betNumbersElements[index].innerText);
-                    betNumbersElements[index].className = 'selected';
+                    betNumbersElements[index].className = `selected-${currentBetType}`;
 
                 }
 
@@ -70,9 +82,62 @@ window.onload = () => {
 
     }
 
+    function switchBetTypesEvents () {
+
+        const lotoButton = document.querySelectorAll('button')[0],
+        megaButton = document.querySelectorAll('button')[1],
+        maniaButton = document.querySelectorAll('button')[2];
+
+        lotoButton.addEventListener('click', () => {
+            
+            clearGame();
+            lotoButton.setAttribute('style', 'background-color: #7F3992; color: #fff;');
+            megaButton.setAttribute('style', '');
+            maniaButton.setAttribute('style', '');
+            currentBetType = 'loto';
+            
+        });
+        megaButton.addEventListener('click', () => {
+            
+            clearGame();
+            megaButton.setAttribute('style', 'background-color: #27C383; color: #fff;');
+            lotoButton.setAttribute('style', '');
+            maniaButton.setAttribute('style', '');
+            currentBetType = 'mega';
+            
+        });
+        maniaButton.addEventListener('click', () => {
+            
+            clearGame();
+            maniaButton.setAttribute('style', 'background-color: #F79C31; color: #fff;');
+            megaButton.setAttribute('style', '');
+            lotoButton.setAttribute('style', '');
+            currentBetType = 'mania';
+            
+        });
+
+    }
+
+    function buttonsEvents () {
+
+        const completeGameButton = document.querySelectorAll('button')[3],
+        clearGameButton = document.querySelectorAll('button')[4],
+        addToCartButton = document.querySelectorAll('button')[5];
+
+        completeGameButton.addEventListener('click', () => {});
+        clearGameButton.addEventListener('click', clearGame);
+        addToCartButton.addEventListener('click', () => {});
+
+        return;
+
+    }
+
     function handleEventListeners () {
 
         betNumbersEvents();
+        buttonsEvents();
+        switchBetTypesEvents();
+        return;
 
     }
 

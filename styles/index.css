@@ -444,7 +444,7 @@ div[data-js=bet-grid] {
 
 }
 
-.selected {
+.selected-mega {
 
     background-color: #27C383;
     transition: .3s background linear;
@@ -461,9 +461,55 @@ div[data-js=bet-grid] {
 
 }
 
-.selected:hover {
+.selected-mega:hover {
 
     background-color: #13b772;
+
+}
+
+.selected-loto {
+
+    background-color: #7F3992;
+    transition: .3s background linear;
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 20px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: .2s linear;
+
+}
+
+.selected-loto:hover {
+
+    background-color: #712e84;
+
+}
+
+.selected-mania {
+
+    background-color: #F79C31;
+    transition: .3s background linear;
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 20px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: .2s linear;
+
+}
+
+.selected-mania:hover {
+
+    background-color: #df8d2e;
 
 }
 
