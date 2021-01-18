@@ -148,7 +148,7 @@ main.container > .cart {
 
     background-color: #fff;
     border-radius: 10px;
-    height: 530;
+    max-height: 600px;
     border: 1px solid #E2E2E2;
     grid-area: cart;
     display: flex;
@@ -178,7 +178,22 @@ main.container > .cart > .bet-selections {
     justify-content: center;
     align-items: center;
     color: #868686;
+    overflow-y: scroll;
     margin-bottom: 40px;
+    padding: 130px 0px 10px 0px;
+
+}
+
+main.container > .cart > .bet-selections::-webkit-scrollbar-thumb {
+
+    border-radius: 12px;
+    background-color: #E2E2E2;
+
+}
+
+main.container > .cart > .bet-selections::-webkit-scrollbar {
+
+    width: 5px;
 
 }
 
@@ -186,21 +201,36 @@ main.container > .cart > .bet-selections > .bet-content {
 
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
 
 }
 
-main.container > .cart > .bet-selections > .bet-content + .bet-content {
+main.container > .cart > .bet-selections > .bet-content + .bet-content {}
 
-    margin-bottom: 0px;
-
-}
-
-main.container > .cart > .bet-selections > .bet-content > .separator {
+main.container > .cart > .bet-selections > .bet-content > .separator-loto {
 
     width: 4px;
     height: 86px;
     background-color: #7F3992;
+    border-radius: 100px 0px 0px 100px;
+    margin: 0px 14px;
+
+}
+
+main.container > .cart > .bet-selections > .bet-content > .separator-mega {
+
+    width: 4px;
+    height: 86px;
+    background-color: #01AC66;
+    border-radius: 100px 0px 0px 100px;
+    margin: 0px 14px;
+
+}
+
+main.container > .cart > .bet-selections > .bet-content > .separator-mania {
+
+    width: 4px;
+    height: 86px;
+    background-color: #F79C31;
     border-radius: 100px 0px 0px 100px;
     margin: 0px 14px;
 
@@ -587,4 +617,4 @@ main.container > footer {
     grid-area: footer;
     border-top: 2.5px solid #ebebeb;
 
-}
+} 

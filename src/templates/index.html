@@ -5,7 +5,7 @@
     <title>Lotofácil - TGL</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/index.css" type="text/css">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}" type="text/css">
 </head>
 <body>
     <header class="header-content">
@@ -32,7 +32,7 @@
         <div class="bet">
             <div>
                 <p>NEW BET</p>
-                <p>FOR MEGA-SENA</p>
+                <p data-js="bet-type">FOR LOTOFÁCIL</p>
             </div>
             <div>
                 <p>Choose a game</p>
@@ -71,49 +71,12 @@
                 CART
             </span>
             <div class="bet-selections">
-                <div class="bet-content">
-                    <i  style="color: #888888; cursor: pointer;" data-feather="trash-2"></i>
-                    <div class="separator">
-
-                    </div>
-                    <div class="bet-info">
-                        <span>
-                            01, 02,04,05,06,07,09,15,17,20,21, 22,23,24,25
-                        </span>
-                        <div>
-                            <span>
-                                Lotofácil
-                            </span>
-                            <span>
-                                R$ 2,50
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="bet-content">
-                    <i  style="color: #888888; cursor: pointer;" data-feather="trash-2"></i>
-                    <div class="separator">
-
-                    </div>
-                    <div class="bet-info">
-                        <span>
-                            01, 02,04,05,06,07,09,15,17,20,21, 22,23,24,25
-                        </span>
-                        <div>
-                            <span>
-                                Mega-Sena
-                            </span>
-                            <span>
-                                R$ 4,50
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div>
                 <span>CART</span>
                 <span>TOTAL:</span>
-                <span>R$ 0,00</span>
+                <span data-js="total-value">R$ 0,00</span>
             </div>
             <div>
                 <span>
@@ -127,7 +90,7 @@
         </footer>
     </main>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="../javascript/feather.js"></script>
-    <script src="../javascript/index.js" ></script>
+    <script type="module" src="{{url_for('static', filename='javascript/app/feather.js')}}"></script>
+    <script type="module" src="{{url_for('static', filename='javascript/app/index.js')}}" ></script>
 </body>
 </html>
