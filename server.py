@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
+import os
 
 # creates a Flask application, named app
 app = Flask(__name__, static_url_path='', template_folder='./src/templates', static_folder='./src/static')
