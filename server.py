@@ -14,4 +14,4 @@ def hello():
 
 # run the application
 if __name__ == "__main__":
-    app.run(port=os.environ.get('PORT'), debug=True)
+    app.run(host=os.environ.get('HOST'), port=os.environ.get('PORT'), debug=True)
