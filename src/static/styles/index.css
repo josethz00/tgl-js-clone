@@ -179,6 +179,7 @@ main.container > .cart > .bet-selections {
     align-items: center;
     color: #868686;
     overflow-y: scroll;
+    height: 200px;
     margin-bottom: 40px;
     padding: 130px 0px 10px 0px;
 
@@ -203,8 +204,6 @@ main.container > .cart > .bet-selections > .bet-content {
     align-items: center;
 
 }
-
-main.container > .cart > .bet-selections > .bet-content + .bet-content {}
 
 main.container > .cart > .bet-selections > .bet-content > .separator-loto {
 

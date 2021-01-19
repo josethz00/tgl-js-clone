@@ -3,7 +3,7 @@ import { isInArray } from '../utils/isInArray.js';
 import { getLocalStorageKey } from '../utils/getLocalStorageKey.js';
 import { convertToBRL } from '../utils/convertToBRL.js';
 
-window.onload = () => {
+window.onload = function () {
 
     const betGrid = document.querySelector('[data-js=bet-grid]');
     const totalValueField = document.querySelector('[data-js=total-value');
@@ -74,8 +74,9 @@ window.onload = () => {
             trashIcon.setAttribute('style', 'color: #888888; cursor: pointer;');
             trashIcon.setAttribute('data-feather', 'trash-2');
             betContentDiv.appendChild(trashIcon);
+            trashIcon.addEventListener('click', () => removeFromCart (betContentDiv), false);
             const separatorDiv = document.createElement('div');
-            separatorDiv.className = `separator-${currentBetType}`;
+            separatorDiv.className = `separator-${items[index].currentBetType}`;
             betContentDiv.appendChild(separatorDiv);
             const betInfoDiv = document.createElement('div');
             betInfoDiv.className = 'bet-info';
@@ -84,7 +85,7 @@ window.onload = () => {
             betInfoDiv.appendChild(spanWithBetNumbers);
             const betPriceDiv = document.createElement('div');
             const betTitleSpan = document.createElement('span');
-            betTitleSpan.innerText = betTitle[currentBetType];
+            betTitleSpan.innerText = betTitle[items[index].currentBetType];
             const betPriceSpan = document.createElement('span');
             betPriceSpan.innerText = convertToBRL(items[index].betValue);
             betInfoDiv.appendChild(betPriceDiv);
@@ -101,6 +102,52 @@ window.onload = () => {
 
     populateCart(initialCartData);
 
+    function updateCart (item) {
+
+        const betContentDiv = document.createElement('div');
+        betContentDiv.className = 'bet-content';
+        const trashIcon = document.createElement('i');
+        trashIcon.setAttribute('style', 'color: #888888; cursor: pointer;');
+        trashIcon.setAttribute('data-feather', 'trash-2');
+        betContentDiv.appendChild(trashIcon);
+        trashIcon.addEventListener('click', () => removeFromCart (betContentDiv), false);
+        const separatorDiv = document.createElement('div');
+        separatorDiv.className = `separator-${item.currentBetType}`;
+        betContentDiv.appendChild(separatorDiv);
+        const betInfoDiv = document.createElement('div');
+        betInfoDiv.className = 'bet-info';
+        const spanWithBetNumbers = document.createElement('span');
+        spanWithBetNumbers.innerText = item.markedNumbers.join(', ');
+        betInfoDiv.appendChild(spanWithBetNumbers);
+        const betPriceDiv = document.createElement('div');
+        const betTitleSpan = document.createElement('span');
+        betTitleSpan.innerText = item.currentBetType;
+        const betPriceSpan = document.createElement('span');
+        betPriceSpan.innerText = convertToBRL(item.betValue);
+        betInfoDiv.appendChild(betPriceDiv);
+        betPriceDiv.appendChild(betTitleSpan);
+        betPriceDiv.appendChild(betPriceSpan);
+        betContentDiv.appendChild(betInfoDiv);
+        betSelections.appendChild(betContentDiv);
+
+        feather.replace();
+
+        return;
+
+    }
+
+    function removeFromCart (element) {
+
+        console.log('aaaa')
+        const recoveredCartItems = getLocalStorageKey('cart');
+        recoveredCartItems.splice(Number(element.innerText - 1), 1);
+        const updatedCart = recoveredCartItems;
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+        return element.parentElement.removeChild(element);
+
+    }
+    
     function clearGame () {
 
         for (let index = 0; index < betNumbersElements.length; index++) {
@@ -161,6 +208,11 @@ window.onload = () => {
         const updatedCart = recoveredCartItems;
         localStorage.setItem('cart', JSON.stringify(updatedCart));
         calculateTotalValue(updatedCart);
+        updateCart({
+            betValue,
+            currentBetType,
+            markedNumbers
+        });
         clearGame();
 
         return;
