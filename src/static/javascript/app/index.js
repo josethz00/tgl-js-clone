@@ -108,6 +108,14 @@ window.onload = function () {
 
     function updateCart (item) {
 
+        const betTitle = {
+
+            'loto': 'Lotofácil',
+            'mega': 'Mega-Sena',
+            'mania': 'Lotomania'
+
+        };
+
         const betContentDiv = document.createElement('div');
         betContentDiv.className = 'bet-content';
 
@@ -125,7 +133,7 @@ window.onload = function () {
         betInfoDiv.appendChild(spanWithBetNumbers);
         const betPriceDiv = document.createElement('div');
         const betTitleSpan = document.createElement('span');
-        betTitleSpan.innerText = item.currentBetType;
+        betTitleSpan.innerText = betTitle[item.currentBetType];
         const betPriceSpan = document.createElement('span');
         betPriceSpan.innerText = convertToBRL(item.betValue);
         betInfoDiv.appendChild(betPriceDiv);
