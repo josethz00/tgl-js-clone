@@ -178,6 +178,7 @@ main.container > .cart > .bet-selections {
     color: #868686;
     overflow-y: scroll;
     height: 200px;
+    align-items: center;
     margin-bottom: 40px;
     padding: 15px 0px 10px 0px;
     align-items: center;

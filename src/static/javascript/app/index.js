@@ -65,6 +65,15 @@ window.onload = function () {
 
         };
 
+        if (!Array.isArray(items) && !items.length) {
+
+            const emptyCartAdvice = document.createElement('span');
+            emptyCartAdvice.setAttribute('style', 'text-align: center; font-weiht: 500;');
+            emptyCartAdvice.innerText = 'O seu carrinho está vazio...';
+            betSelections.appendChild(emptyCartAdvice);
+
+        }
+
         for (let index = 0; index < items.length; index++) {
 
 
