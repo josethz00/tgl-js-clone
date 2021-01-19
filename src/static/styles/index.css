@@ -175,13 +175,12 @@ main.container > .cart > .bet-selections {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: #868686;
     overflow-y: scroll;
     height: 200px;
     margin-bottom: 40px;
-    padding: 130px 0px 10px 0px;
+    padding: 15px 0px 10px 0px;
+    align-items: center;
 
 }
 

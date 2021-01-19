@@ -72,9 +72,9 @@ window.onload = function () {
             betContentDiv.className = 'bet-content';
             const trashIcon = document.createElement('i');
             trashIcon.setAttribute('style', 'color: #888888; cursor: pointer;');
-            trashIcon.setAttribute('data-feather', 'trash-2');
+            trashIcon.setAttribute('data-feather', 'trash-2')
+            trashIcon.addEventListener('click', () => removeFromCart (betContentDiv));
             betContentDiv.appendChild(trashIcon);
-            trashIcon.addEventListener('click', () => removeFromCart (betContentDiv), false);
             const separatorDiv = document.createElement('div');
             separatorDiv.className = `separator-${items[index].currentBetType}`;
             betContentDiv.appendChild(separatorDiv);
@@ -94,9 +94,13 @@ window.onload = function () {
             betContentDiv.appendChild(betInfoDiv);
             betSelections.appendChild(betContentDiv);
 
+            feather.replace();
+
+            betContentDiv.childNodes[0].addEventListener('click', () => removeFromCart (betContentDiv));
+
         }
-        
-        feather.replace();
+
+        return;
 
     }
 
@@ -106,11 +110,11 @@ window.onload = function () {
 
         const betContentDiv = document.createElement('div');
         betContentDiv.className = 'bet-content';
+
         const trashIcon = document.createElement('i');
         trashIcon.setAttribute('style', 'color: #888888; cursor: pointer;');
         trashIcon.setAttribute('data-feather', 'trash-2');
         betContentDiv.appendChild(trashIcon);
-        trashIcon.addEventListener('click', () => removeFromCart (betContentDiv), false);
         const separatorDiv = document.createElement('div');
         separatorDiv.className = `separator-${item.currentBetType}`;
         betContentDiv.appendChild(separatorDiv);
@@ -132,19 +136,20 @@ window.onload = function () {
 
         feather.replace();
 
-        return;
+        betContentDiv.childNodes[0].addEventListener('click', () => removeFromCart (betContentDiv));
+
+        return ;
 
     }
 
     function removeFromCart (element) {
 
-        console.log('aaaa')
         const recoveredCartItems = getLocalStorageKey('cart');
         recoveredCartItems.splice(Number(element.innerText - 1), 1);
         const updatedCart = recoveredCartItems;
         localStorage.setItem('cart', JSON.stringify(updatedCart));
 
-        return element.parentElement.removeChild(element);
+        return element.parentNode.removeChild(element);
 
     }
     
