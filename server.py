@@ -22,5 +22,5 @@ def server_bets_json():
 
 # run the application
 if __name__ == "__main__":
-    app.run(host=os.environ.get('HOST'), port=os.environ.get('PORT'), debug=True)
-    #app.run(debug=True)
+    #app.run(host=os.environ.get('HOST'), port=os.environ.get('PORT'), debug=True)
+    app.run(debug=True)

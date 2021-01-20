@@ -15,7 +15,7 @@ window.onload = function () {
     const emptyCartAdvice = document.createElement('span');
 
     let betNumbers = [1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
-    const betNumbersElements = [];
+    let betNumbersElements = [];
     let markedNumbers = [];
     let ajaxResponse;
 
@@ -50,6 +50,7 @@ window.onload = function () {
     function fillBetNumbers () {
 
         betNumbers = [];
+        betNumbersElements = [];
 
         const filteredBetType = ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType);
 
@@ -61,8 +62,6 @@ window.onload = function () {
             index++
 
         }
-
-        console.log(betNumbers)
 
     } 
 
@@ -77,6 +76,12 @@ window.onload = function () {
     const styleTag = createCssStyleTag ();
 
     function populateBetGrid () {
+
+        while (betGrid.firstChild) {
+        
+            betGrid.removeChild(betGrid.lastChild);
+
+        }
 
         for (let index = 0; index < betNumbers.length; index++) {
 
@@ -247,9 +252,9 @@ window.onload = function () {
         clearGame();
         const randomBets = [];
 
-        while (randomBets.length < 15) {
+        while (randomBets.length < ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType)[0]['max-number']) {
 
-            const randomNumber = getRandomInteger(0, 35)
+            const randomNumber = getRandomInteger(0, ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType)[0].range - 1)
 
             if (!isInArray(randomNumber, randomBets)) {
              
@@ -276,7 +281,7 @@ window.onload = function () {
 
     function addToCart () {
 
-        if (markedNumbers.length !== 15)
+        if (markedNumbers.length !== ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType)[0]['max-number'])
             return;
 
         const recoveredCartItems = getLocalStorageKey('cart');
@@ -314,7 +319,7 @@ window.onload = function () {
 
                 else {
 
-                    if (markedNumbers.length < 15) {
+                    if (markedNumbers.length < ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType)[0]['max-number']) {
 
                         markedNumbers.push(betNumbersElements[index].innerText);
                         betNumbersElements[index].className = `selected-${currentBetType}`;
@@ -351,6 +356,9 @@ window.onload = function () {
             currentBetType = 'lotofacil';
             betValue = 2.5;
             betTypeField.innerText = 'FOR LOTOFÁCIL';
+            fillBetNumbers();
+            populateBetGrid();
+            betNumbersEvents();
             
         });
         megaButton.addEventListener('click', () => {
@@ -366,6 +374,8 @@ window.onload = function () {
             betValue = 4.5;
             betTypeField.innerText = 'FOR MEGA-SENA';
             fillBetNumbers();
+            populateBetGrid();
+            betNumbersEvents();
             
         });
         maniaButton.addEventListener('click', () => {
@@ -381,6 +391,8 @@ window.onload = function () {
             betValue = 2;
             betTypeField.innerText = 'FOR LOTOMANIA';
             fillBetNumbers();
+            populateBetGrid();
+            betNumbersEvents();
             
         });
 

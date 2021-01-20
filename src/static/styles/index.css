@@ -225,7 +225,7 @@ main.container > .cart > .bet-selections > .bet-content > .separator-megasena {
 
 }
 
-main.container > .cart > .bet-selections > .bet-content > .separator-quinasena {
+main.container > .cart > .bet-selections > .bet-content > .separator-quina {
 
     width: 4px;
     height: 86px;
@@ -519,7 +519,7 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-quinasena {
+.selected-quina {
 
     background-color: #F79C31;
     transition: .3s background linear;
@@ -536,7 +536,7 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-quinasena:hover {
+.selected-quina:hover {
 
     background-color: #df8d2e;
 
