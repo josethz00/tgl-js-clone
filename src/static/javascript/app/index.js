@@ -2,6 +2,9 @@ import { getRandomInteger } from '../utils/getRandomInteger.js';
 import { isInArray } from '../utils/isInArray.js';
 import { getLocalStorageKey } from '../utils/getLocalStorageKey.js';
 import { convertToBRL } from '../utils/convertToBRL.js';
+import { ajax } from './ajax.js';
+import { isRequestOk } from '../utils/isRequestOk.js';
+import { normalizeString } from '../utils/normalizeString.js';
 
 window.onload = function () {
 
@@ -9,14 +12,59 @@ window.onload = function () {
     const totalValueField = document.querySelector('[data-js=total-value');
     const betTypeField = document.querySelector('[data-js=bet-type');
     const betSelections = document.querySelector('.bet-selections');
-    const betNumbers = [1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+    const emptyCartAdvice = document.createElement('span');
+
+    let betNumbers = [1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
     const betNumbersElements = [];
     let markedNumbers = [];
-    let currentBetType = 'loto';
+    let ajaxResponse;
+
+    let currentBetType = 'lotofacil';
     let betValue = 2.5;
     const initialCartData = getLocalStorageKey('cart');
 
     totalValueField.innerText = calculateTotalValue(initialCartData);
+
+    function handleAjaxRequest () {
+
+        ajax.open('GET', '/bets');
+        ajax.responseType = 'json';
+        ajax.send();
+
+        ajax.addEventListener('readystatechange', () => {
+
+            if (isRequestOk(ajax)) {
+
+                ajaxResponse = ajax.response;
+        
+            }
+
+        });
+
+        return;
+
+    }
+
+    handleAjaxRequest();
+
+    function fillBetNumbers () {
+
+        betNumbers = [];
+
+        const filteredBetType = ajaxResponse.types.filter((obj) => normalizeString(obj.type) === currentBetType);
+
+        let index = 0;
+
+        while (betNumbers.length < filteredBetType[0].range) {
+
+            betNumbers.push(index+1);
+            index++
+
+        }
+
+        console.log(betNumbers)
+
+    } 
 
     function createCssStyleTag () {
 
@@ -59,16 +107,15 @@ window.onload = function () {
 
         const betTitle = {
 
-            'loto': 'Lotofácil',
-            'mega': 'Mega-Sena',
-            'mania': 'Lotomania'
+            'lotofacil': 'Lotofácil',
+            'megasena': 'Mega-Sena',
+            'quina': 'Quina-Sena'
 
         };
 
-        if (!Array.isArray(items) && !items.length) {
-
-            const emptyCartAdvice = document.createElement('span');
-            emptyCartAdvice.setAttribute('style', 'text-align: center; font-weiht: 500;');
+        if (!items.length) {
+            
+            emptyCartAdvice.setAttribute('style', 'text-align: center; font-weiht: 500; font-size: 18px;');
             emptyCartAdvice.innerText = 'O seu carrinho está vazio...';
             betSelections.appendChild(emptyCartAdvice);
 
@@ -119,9 +166,9 @@ window.onload = function () {
 
         const betTitle = {
 
-            'loto': 'Lotofácil',
-            'mega': 'Mega-Sena',
-            'mania': 'Lotomania'
+            'lotofacil': 'Lotofácil',
+            'megasena': 'Mega-Sena',
+            'quina': 'Quina-Sena'
 
         };
 
@@ -153,6 +200,8 @@ window.onload = function () {
 
         feather.replace();
 
+        emptyCartAdvice.style.display = 'none';
+
         betContentDiv.childNodes[0].addEventListener('click', () => removeFromCart (betContentDiv));
 
         return ;
@@ -162,6 +211,15 @@ window.onload = function () {
     function removeFromCart (element) {
 
         const recoveredCartItems = getLocalStorageKey('cart');
+
+        if (recoveredCartItems.length === 1) {
+
+            emptyCartAdvice.setAttribute('style', 'text-align: center; font-weiht: 500; font-size: 18px;');
+            emptyCartAdvice.innerText = 'O seu carrinho está vazio...';
+            betSelections.appendChild(emptyCartAdvice);
+
+        }
+
         recoveredCartItems.splice(Number(element.innerText - 1), 1);
         const updatedCart = recoveredCartItems;
         localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -256,8 +314,12 @@ window.onload = function () {
 
                 else {
 
-                    markedNumbers.push(betNumbersElements[index].innerText);
-                    betNumbersElements[index].className = `selected-${currentBetType}`;
+                    if (markedNumbers.length < 15) {
+
+                        markedNumbers.push(betNumbersElements[index].innerText);
+                        betNumbersElements[index].className = `selected-${currentBetType}`;
+
+                    }
 
                 }
 
@@ -279,44 +341,46 @@ window.onload = function () {
 
         lotoButton.addEventListener('click', () => {
             
-            if (currentBetType === 'loto')
+            if (currentBetType === 'lotofacil')
                 return;
 
             clearGame();
             lotoButton.setAttribute('style', 'background-color: #7F3992; color: #fff;');
             megaButton.setAttribute('style', '');
             maniaButton.setAttribute('style', '');
-            currentBetType = 'loto';
+            currentBetType = 'lotofacil';
             betValue = 2.5;
             betTypeField.innerText = 'FOR LOTOFÁCIL';
             
         });
         megaButton.addEventListener('click', () => {
             
-            if (currentBetType === 'mega')
+            if (currentBetType === 'megasena')
                 return;
 
             clearGame();
             megaButton.setAttribute('style', 'background-color: #27C383; color: #fff;');
             lotoButton.setAttribute('style', '');
             maniaButton.setAttribute('style', '');
-            currentBetType = 'mega';
+            currentBetType = 'megasena';
             betValue = 4.5;
             betTypeField.innerText = 'FOR MEGA-SENA';
+            fillBetNumbers();
             
         });
         maniaButton.addEventListener('click', () => {
             
-            if (currentBetType === 'mania')
+            if (currentBetType === 'quina')
                 return;
 
             clearGame();
             maniaButton.setAttribute('style', 'background-color: #F79C31; color: #fff;');
             megaButton.setAttribute('style', '');
             lotoButton.setAttribute('style', '');
-            currentBetType = 'mania';
+            currentBetType = 'quina';
             betValue = 2;
             betTypeField.innerText = 'FOR LOTOMANIA';
+            fillBetNumbers();
             
         });
 
