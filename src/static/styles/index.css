@@ -205,7 +205,7 @@ main.container > .cart > .bet-selections > .bet-content {
 
 }
 
-main.container > .cart > .bet-selections > .bet-content > .separator-loto {
+main.container > .cart > .bet-selections > .bet-content > .separator-lotofacil {
 
     width: 4px;
     height: 86px;
@@ -215,7 +215,7 @@ main.container > .cart > .bet-selections > .bet-content > .separator-loto {
 
 }
 
-main.container > .cart > .bet-selections > .bet-content > .separator-mega {
+main.container > .cart > .bet-selections > .bet-content > .separator-megasena {
 
     width: 4px;
     height: 86px;
@@ -225,7 +225,7 @@ main.container > .cart > .bet-selections > .bet-content > .separator-mega {
 
 }
 
-main.container > .cart > .bet-selections > .bet-content > .separator-mania {
+main.container > .cart > .bet-selections > .bet-content > .separator-quinasena {
 
     width: 4px;
     height: 86px;
@@ -473,7 +473,7 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-mega {
+.selected-megasena {
 
     background-color: #27C383;
     transition: .3s background linear;
@@ -490,13 +490,13 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-mega:hover {
+.selected-megasena:hover {
 
     background-color: #13b772;
 
 }
 
-.selected-loto {
+.selected-lotofacil {
 
     background-color: #7F3992;
     transition: .3s background linear;
@@ -513,13 +513,13 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-loto:hover {
+.selected-lotofacil:hover {
 
     background-color: #712e84;
 
 }
 
-.selected-mania {
+.selected-quinasena {
 
     background-color: #F79C31;
     transition: .3s background linear;
@@ -536,7 +536,7 @@ div[data-js=bet-grid] {
 
 }
 
-.selected-mania:hover {
+.selected-quinasena:hover {
 
     background-color: #df8d2e;
 
